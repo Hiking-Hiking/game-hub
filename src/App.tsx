@@ -16,14 +16,10 @@ function App() {
 
         {/* 只在大于1024px的宽屏上显示aside部分 */}
         <Show above="lg">
-          <GridItem area="aside" bg="gold">
-            Aside
-          </GridItem>
+          <GridItem area="aside">Aside</GridItem>
         </Show>
 
-        <GridItem area="main" bg="dodgerblue">
-          Main
-        </GridItem>
+        <GridItem area="main">Main</GridItem>
       </Grid>
     </div>
   );
