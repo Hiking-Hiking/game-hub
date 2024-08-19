@@ -2,6 +2,7 @@ import { SimpleGrid, Text } from "@chakra-ui/react";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
+import GameCardContainer from "./GameCardContainer";
 
 const GameGrid = () => {
   const { games, error, isLoading } = useGames();
@@ -29,9 +30,16 @@ const GameGrid = () => {
         {/* {isLoading &&
           skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)} */}
         {isLoading &&
-          skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+          skeletons.map((skeleton) => (
+            <GameCardContainer>
+              <GameCardSkeleton key={skeleton} />
+            </GameCardContainer>
+          ))}
+        {/* 如何在一些标签外面快速包裹一个新标签：选中想要包裹在其中的代码，然后按 ctrl + shift + p,在输入框输入wrap，选择'wrap with abbreviation'（使用缩写包围），直接在输入框输入标签名，点击enter就可以了 */}
         {games.map((game) => (
-          <GameCard key={game.id} game={game} />
+          <GameCardContainer>
+            <GameCard key={game.id} game={game} />
+          </GameCardContainer>
         ))}
       </SimpleGrid>
     </>
