@@ -3,9 +3,14 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
+import { Genre } from "../hooks/useGenres";
 
-const GameGrid = () => {
-  const { data, error, isLoading } = useGames();
+interface Props {
+  selectedGenre: Genre | null;
+}
+
+const GameGrid = ({ selectedGenre }: Props) => {
+  const { data, error, isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6];
   return (
     <>
@@ -27,18 +32,16 @@ const GameGrid = () => {
         padding="10px"
         spacing={3}
       >
-        {/* {isLoading &&
-          skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)} */}
         {isLoading &&
           skeletons.map((skeleton) => (
-            <GameCardContainer>
-              <GameCardSkeleton key={skeleton} />
+            <GameCardContainer key={skeleton}>
+              <GameCardSkeleton />
             </GameCardContainer>
           ))}
         {/* 如何在一些标签外面快速包裹一个新标签：选中想要包裹在其中的代码，然后按 ctrl + shift + p,在输入框输入wrap，选择'wrap with abbreviation'（使用缩写包围），直接在输入框输入标签名，点击enter就可以了 */}
         {data.map((game) => (
-          <GameCardContainer>
-            <GameCard key={game.id} game={game} />
+          <GameCardContainer key={game.id}>
+            <GameCard game={game} />
           </GameCardContainer>
         ))}
       </SimpleGrid>

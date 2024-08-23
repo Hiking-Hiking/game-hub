@@ -50,7 +50,7 @@ const PlatformIconList = ({ platforms }: Props) => {
         //{iconMap[platform.slug]}的含义；
         //是对象的属性访问法，它的作用是，获取到当前platform对象的slug属性，使用这个slug属性值作为iconMap对象的键，再从iconMap对象中获取到这个键对应的值（即图标）；
         //例如:如果platform.slug是'pc',那么{iconMap[platform.slug]}就是{iconMap[pc]}，在iconMap对象中找到键pc，它对应的值是'FaWindows'，最终{iconMap[platform.slug]}会被解析为FaWindow组件。
-        <Icon as={iconMap[platform.slug]} color="gray.500" />
+        <Icon as={iconMap[platform.slug]} color="gray.500" key={platform.id} />
       ))}
     </HStack>
   );
