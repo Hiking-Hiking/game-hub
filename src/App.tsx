@@ -5,13 +5,16 @@ import GenreList from "./components/GenreList";
 import { useState } from "react";
 import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
+import { Platform } from "./hooks/useGames";
 
 function App() {
   // 初始值为null，表示默认是没有genre流派被选中
   // 要告诉ts编译器，这个selectedGenre状态是用来存储genre 数据的，所以要加上一个通用类型参数为genre；
   // useState<Genre | null>，表示这里可以是一个genre对象，也可以是一个空值，
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+    null
+  );
   return (
     <div className="App">
       <Grid
@@ -42,8 +45,14 @@ function App() {
         </Show>
 
         <GridItem area="main">
-          <PlatformSelector />
-          <GameGrid selectedGenre={selectedGenre} />
+          <PlatformSelector
+            onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
+            selectedPlatform={selectedPlatform}
+          />
+          <GameGrid
+            selectedGenre={selectedGenre}
+            selectedPlatform={selectedPlatform}
+          />
         </GridItem>
       </Grid>
     </div>
