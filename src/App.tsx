@@ -7,14 +7,17 @@ import { Genre } from "./hooks/useGenres";
 import PlatformSelector from "./components/PlatformSelector";
 import { Platform } from "./hooks/useGames";
 
-function App() {
+export interface GameQuery {
   // 初始值为null，表示默认是没有genre流派被选中
   // 要告诉ts编译器，这个selectedGenre状态是用来存储genre 数据的，所以要加上一个通用类型参数为genre；
   // useState<Genre | null>，表示这里可以是一个genre对象，也可以是一个空值，
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
-    null
-  );
+  genre: Genre | null;
+  platform: Platform | null;
+}
+
+function App() {
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+
   return (
     <div className="App">
       <Grid
@@ -38,21 +41,20 @@ function App() {
         <Show above="lg">
           <GridItem area="aside" paddingX={5}>
             <GenreList
-              selectedGenre={selectedGenre}
-              onSelectedGenre={(genre) => setSelectedGenre(genre)}
+              selectedGenre={gameQuery.genre}
+              onSelectedGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
             />
           </GridItem>
         </Show>
 
         <GridItem area="main">
           <PlatformSelector
-            onSelectedPlatform={(platform) => setSelectedPlatform(platform)}
-            selectedPlatform={selectedPlatform}
+            onSelectedPlatform={(platform) =>
+              setGameQuery({ ...gameQuery, platform })
+            }
+            selectedPlatform={gameQuery.platform}
           />
-          <GameGrid
-            selectedGenre={selectedGenre}
-            selectedPlatform={selectedPlatform}
-          />
+          <GameGrid gameQuery={gameQuery} />
         </GridItem>
       </Grid>
     </div>
