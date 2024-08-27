@@ -14,6 +14,7 @@ export interface GameQuery {
   // useState<Genre | null>，表示这里可以是一个genre对象，也可以是一个空值，
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 
 function App() {
@@ -56,7 +57,12 @@ function App() {
               }
               selectedPlatform={gameQuery.platform}
             />
-            <SortSelector />
+            <SortSelector
+              onSelectSortOrder={(sortOrder) =>
+                setGameQuery({ ...gameQuery, sortOrder })
+              }
+              sortOrder={gameQuery.sortOrder}
+            />
           </HStack>
           <GameGrid gameQuery={gameQuery} />
         </GridItem>
