@@ -1,3 +1,5 @@
+import noImage from "../assets/no-image-placeholder.webp";
+
 /**
  * 裁剪图片大小的工具函数
  * @param url 图片的url地址
@@ -9,7 +11,7 @@
  *        理论上可以、但我们做个这个demo的rawg官网的后端不支持该功能，因此我们在裁剪图片尺寸的方法里，无法传递任何随机的值，而是写了固定的 600 * 400。某些图片的尺寸支持裁剪，但做demo的mosh老师并不完全清楚，不知道这些尺寸是多少。
  */
 const getCroppedImageUrl = (url: string) => {
-  if (!url) return "";
+  if (!url) return noImage;
   const target = "media/";
   const index = url.indexOf(target) + target.length;
   //因为RAWG的api支持这种方式裁剪图片，所以这样对URL裁剪拼接，将crop参数插入进去，获得修改了大小的url；
