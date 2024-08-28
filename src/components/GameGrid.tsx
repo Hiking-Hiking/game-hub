@@ -25,9 +25,9 @@ const GameGrid = ({ gameQuery }: Props) => {
 
       实施：给游戏卡片外面的包裹容器上（在GameGrid.tsx文件里的<SimpleGrid>组件标签上），columns设置的属性值，不能设置为固定的3，传递一个分段设值的对象，将小号设为1，中号设为 2 ，大号设为 3 ，特大号设为 5 。 */}
       <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         padding="10px"
-        spacing={3}
+        spacing={6}
       >
         {isLoading &&
           skeletons.map((skeleton) => (
