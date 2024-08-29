@@ -14,9 +14,9 @@ const GameGrid = ({ gameQuery }: Props) => {
   const { data, error, isLoading } = useGames(gameQuery);
 
   const skeletons = [1, 2, 3, 4, 5, 6];
+  if (error) return <Text>{error}</Text>;
   return (
     <>
-      {error && <Text>{error}</Text>}
       {/*
       分段设置呈现的列数。 
       原因：因为在小型设备上，不一定有足够的空间能呈现3列；
