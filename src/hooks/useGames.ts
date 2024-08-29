@@ -14,6 +14,9 @@ export interface Game {
   background_image: string;
   parent_platforms: { platform: Platform }[];
   metacritic: number;
+  // rating_top是整数，rating是浮点数；
+  // rating:number;
+  rating_top: number;
 }
 
 const useGames = (gameQuery: GameQuery) =>
